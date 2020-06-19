@@ -82,11 +82,11 @@ $ composer require chanshige/object-hydrator 'v0.1'
     $factory = new ObjectHydratorFactory();
     $hydrator = $factory->newHydrator();
     
-    ### Put data from an array into an Object ###
+    ### Put data from an array into an object. ###
     /** @var object */
     $result = $hydrator->hydrate($data, Example::class);
     
-    ### Put data from an array into an Object ###
+    ### Convert object to array. ###
     /** @var array */
     $array = $hydrator->extract($result);
 
