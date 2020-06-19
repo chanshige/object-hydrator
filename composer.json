@@ -1,0 +1,45 @@
+{
+  "name": "chanshige/object-hydrator",
+  "description": "An ObjectHydrator that array to object to array conversion",
+  "keywords": [
+    "object",
+    "array",
+    "convert",
+    "hydration"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Shigeki Tanaka",
+      "email": "dev@shigeki.tokyo"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Chanshige\\Hydration\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Chanshige\\Hydration\\": "tests/"
+    }
+  },
+  "require": {
+    "php": ">=7.3",
+    "symfony/serializer": "^5.1",
+    "symfony/property-access": "^5.1"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "*",
+    "phpmd/phpmd": "*",
+    "phpunit/phpunit": "^7.0"
+  },
+  "scripts": {
+    "test": [
+      "phpmd src text ./phpmd.xml",
+      "phpcs src",
+      "phpunit"
+    ]
+  }
+}
