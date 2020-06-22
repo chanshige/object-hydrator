@@ -6,6 +6,7 @@ namespace Chanshige\Hydration\Factory;
 
 use Chanshige\Hydration\ObjectHydrator;
 use Chanshige\Hydration\ObjectHydratorInterface;
+use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -21,6 +22,12 @@ final class ObjectHydratorFactory
      */
     public function newHydrator(): ObjectHydratorInterface
     {
-        return new ObjectHydrator(new Serializer([new ObjectNormalizer()]));
+        return new ObjectHydrator(
+            new Serializer(
+                [
+                    new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter())
+                ]
+            )
+        );
     }
 }

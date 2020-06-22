@@ -34,6 +34,7 @@ class ObjectHydratorTest extends TestCase
         $this->assertSame($data['baz'], $object->getBaz());
         $this->assertSame($data['qux'], $object->getBaz());
         $this->assertSame($data['quux'], $object->getBaz());
+        $this->assertSame($data['bar_baz'], $object->getBarBaz());
     }
 
     /**
@@ -48,6 +49,7 @@ class ObjectHydratorTest extends TestCase
         $object->setFoo($data['foo']);
         $object->setBar($data['bar']);
         $object->setQux($data['qux']);
+        $object->setBarBaz($data['bar_baz']);
 
         $this->assertSame($data, $this->hydration->extract($object));
     }
@@ -103,6 +105,7 @@ class ObjectHydratorTest extends TestCase
                     'baz' => 'baz_value1',
                     'qux' => 'baz_value1',
                     'quux' => 'baz_value1',
+                    'bar_baz' => 'bar_baz_value1',
                 ]
             ]
         ];

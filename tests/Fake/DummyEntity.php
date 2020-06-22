@@ -27,6 +27,9 @@ class DummyEntity
     /** @var object|null */
     private $entity;
 
+    /** @var string|null */
+    private $barBaz;
+
     /**
      * @return string|null
      */
@@ -121,5 +124,21 @@ class DummyEntity
     public function setEntity(?object $entity): void
     {
         $this->entity = $entity;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBarBaz(): ?string
+    {
+        return $this->barBaz;
+    }
+
+    /**
+     * @param string|null $barBaz
+     */
+    public function setBarBaz(?string $barBaz): void
+    {
+        $this->barBaz = $barBaz;
     }
 }
