@@ -32,9 +32,22 @@ class ObjectHydratorTest extends TestCase
         $this->assertSame($data['foo'], $object->getFoo());
         $this->assertSame($data['bar'], $object->getBar());
         $this->assertSame($data['baz'], $object->getBaz());
-        $this->assertSame($data['qux'], $object->getBaz());
-        $this->assertSame($data['quux'], $object->getBaz());
+        $this->assertSame($data['qux'], $object->getQux());
+        $this->assertSame($data['quux'], $object->getQuux());
         $this->assertSame($data['bar_baz'], $object->getBarBaz());
+    }
+
+    public function testHydrateNullOrEmptyVal()
+    {
+        $data = [
+            'baz' => null,
+            'qux' => '',
+        ];
+
+        $object = $this->hydration->hydrate($data, DummyEntity::class);
+        $this->assertInstanceOf(DummyEntity::class, $object);
+        $this->assertSame($data['baz'], $object->getBaz());
+        $this->assertSame($data['qux'], $object->getQux());
     }
 
     /**
@@ -54,15 +67,40 @@ class ObjectHydratorTest extends TestCase
         $this->assertSame($data, $this->hydration->extract($object));
     }
 
+    public function testExtractNullOrEmptyVal()
+    {
+        $data = [
+            'baz' => null,
+            'qux' => '',
+            'entity' => [
+                'baz' => '',
+                'qux' => null,
+            ]
+        ];
+        $object = new DummyEntity();
+        $object->setBaz($data['baz']);
+        $object->setQux($data['qux']);
+
+        $object1 = new DummyEntity();
+        $object1->setBaz($data['entity']['baz']);
+        $object1->setQux($data['entity']['qux']);
+
+        $object->setEntity($object1);
+
+        unset($data['baz'], $data['entity']['qux']);
+
+        $this->assertSame($data, $this->hydration->extract($object));
+    }
+
     public function testExtractMaxDepth()
     {
         $data = [
-            'baz' => 'baz_value1',
-            'qux' => 'baz_value1',
-            'quux' => 'baz_value1',
+            'baz' => 'baz_value',
+            'qux' => 'qux_value',
+            'quux' => 'quux_value',
             'entity' => [
-                'foo' => 'foo_value1',
-                'bar' => 'bar_value1',
+                'foo' => 'foo_value',
+                'bar' => 'bar_value',
             ]
         ];
 
@@ -100,12 +138,12 @@ class ObjectHydratorTest extends TestCase
         return [
             [
                 [
-                    'foo' => 'foo_value1',
-                    'bar' => 'bar_value1',
-                    'baz' => 'baz_value1',
-                    'qux' => 'baz_value1',
-                    'quux' => 'baz_value1',
-                    'bar_baz' => 'bar_baz_value1',
+                    'foo' => 'foo_value',
+                    'bar' => 'bar_value',
+                    'baz' => 'baz_value',
+                    'qux' => 'qux_value',
+                    'quux' => 'quux_value',
+                    'bar_baz' => 'bar_baz_value',
                 ]
             ]
         ];
