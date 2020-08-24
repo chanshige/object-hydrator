@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * This file is part of the chanshige/object-hydrator package.
+ *
+ * (c) shigeki tanaka <dev@shigeki.tokyo>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace Chanshige\Hydration;
@@ -8,21 +16,11 @@ use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Throwable;
 
-/**
- * Class ObjectHydrator
- *
- * @package Chanshige
- */
 final class ObjectHydrator implements ObjectHydratorInterface
 {
     /** @var Serializer */
     private $serializer;
 
-    /**
-     * ObjectHydrator constructor.
-     *
-     * @param Serializer $serializer
-     */
     public function __construct(Serializer $serializer)
     {
         $this->serializer = $serializer;
@@ -43,7 +41,7 @@ final class ObjectHydrator implements ObjectHydratorInterface
     /**
      * {@inheritDoc}
      */
-    public function extract(object $object)
+    public function extract($object)
     {
         try {
             return (array)$this->serializer->normalize($object, null, [
