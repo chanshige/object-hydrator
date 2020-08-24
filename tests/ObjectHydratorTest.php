@@ -118,6 +118,43 @@ class ObjectHydratorTest extends TestCase
         $this->assertSame($data, $this->hydration->extract($object));
     }
 
+    public function testExtractMaxDepthForArray()
+    {
+        $object = new DummyEntity();
+        $object->setBaz('123');
+        $object->setQux('456');
+        $object->setQuux('789');
+
+        $expected = [
+            [
+                'baz' => '123',
+                'qux' => '456',
+                'quux' => '789'
+            ],
+            [
+                'baz' => '123',
+                'qux' => '456',
+                'quux' => '789'
+            ],
+            [
+                'baz' => '123',
+                'qux' => '456',
+                'quux' => '789'
+            ]
+        ];
+
+        $this->assertSame(
+            $expected,
+            $this->hydration->extract(
+                [
+                    $object,
+                    $object,
+                    $object,
+                ]
+            )
+        );
+    }
+
     /**
      * @dataProvider dataProvider
      * @param array $data
@@ -125,7 +162,9 @@ class ObjectHydratorTest extends TestCase
     public function testExceptionHydrate(array $data)
     {
         $this->expectException(HydrationException::class);
-        $this->expectExceptionMessage('Could not denormalize object of type "App\Dummy", no supporting normalizer found.');
+        $this->expectExceptionMessage(
+            'Could not denormalize object of type "App\Dummy", no supporting normalizer found.'
+        );
 
         $this->hydration->hydrate($data, 'App\Dummy');
     }

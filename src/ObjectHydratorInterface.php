@@ -1,26 +1,28 @@
 <?php
 
+/*
+ * This file is part of the chanshige/object-hydrator package.
+ *
+ * (c) shigeki tanaka <dev@shigeki.tokyo>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Chanshige\Hydration;
 
-/**
- * Interface ObjectHydratorInterface
- *
- * @package Chanshige
- */
 interface ObjectHydratorInterface
 {
     /**
-     * @param array  $data
-     * @param string $className
+     * @param array<int|string, mixed> $data
      * @return object
      * @throws HydrationException
      */
     public function hydrate(array $data, string $className);
 
     /**
-     * @param object $object single object.
-     * @return array
+     * @param object[]|object $object
+     * @return array<int|string, mixed>
      * @throws HydrationException
      */
-    public function extract(object $object);
+    public function extract($object);
 }
