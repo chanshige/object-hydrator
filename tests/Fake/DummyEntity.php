@@ -30,6 +30,9 @@ class DummyEntity
     /** @var string|null */
     private $barBaz;
 
+    /** @var ObjectInner|null */
+    private $inner;
+
     /**
      * @return string|null
      */
@@ -140,5 +143,21 @@ class DummyEntity
     public function setBarBaz(?string $barBaz): void
     {
         $this->barBaz = $barBaz;
+    }
+
+    /**
+     * @return ObjectInner|null
+     */
+    public function getInner(): ?ObjectInner
+    {
+        return $this->inner;
+    }
+
+    /**
+     * @param ObjectInner $inner
+     */
+    public function setInner(ObjectInner $inner): void
+    {
+        $this->inner = $inner;
     }
 }

@@ -4,6 +4,7 @@ namespace Chanshige\Hydration;
 
 use Chanshige\Hydration\Factory\ObjectHydratorFactory;
 use Chanshige\Hydration\Fake\DummyEntity;
+use Chanshige\Hydration\Fake\ObjectInner;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -167,6 +168,32 @@ class ObjectHydratorTest extends TestCase
         );
 
         $this->hydration->hydrate($data, 'App\Dummy');
+    }
+
+    public function testRecursiveHydrate()
+    {
+        $data = [
+            'foo' => 'foo_value',
+            'bar' => 'bar_value',
+            'baz' => 'baz_value',
+            'inner' => [
+                'id' => 100,
+                'name' => 'inner_name'
+            ],
+        ];
+
+        $object = $this->hydration->hydrate($data, DummyEntity::class);
+
+        $expected = new DummyEntity();
+        $expected->setFoo($data['foo']);
+        $expected->setBar($data['bar']);
+        $expected->setBaz($data['baz']);
+        $inner = new ObjectInner();
+        $inner->setId($data['inner']['id']);
+        $inner->setName($data['inner']['name']);
+        $expected->setInner($inner);
+
+        $this->assertEquals($expected, $object);
     }
 
     /**
