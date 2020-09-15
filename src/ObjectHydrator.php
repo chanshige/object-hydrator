@@ -29,7 +29,7 @@ final class ObjectHydrator implements ObjectHydratorInterface
     /**
      * {@inheritDoc}
      */
-    public function hydrate(array $data, string $className)
+    public function hydrate($data, string $className)
     {
         try {
             return $this->serializer->denormalize($data, $className, null);

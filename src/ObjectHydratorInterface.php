@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Chanshige\Hydration;
 
 interface ObjectHydratorInterface
 {
     /**
-     * @param array<int|string, mixed> $data
-     * @return object
+     * @param mixed $data
      * @throws HydrationException
      */
-    public function hydrate(array $data, string $className);
+    public function hydrate($data, string $className);
 
     /**
      * @param object[]|object $object
