@@ -12,6 +12,9 @@ class ObjectHydratorFactoryTest extends TestCase
     {
         $factory = new ObjectHydratorFactory();
         $this->assertInstanceOf(ObjectHydratorInterface::class, $factory->newInstance());
+        $this->assertInstanceOf(ExtractionInterface::class, $factory->newInstance());
+        $this->assertInstanceOf(HydrationInterface::class, $factory->newInstance());
+
         $this->assertInstanceOf(ObjectHydrator::class, $factory->newInstance());
     }
 }

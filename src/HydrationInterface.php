@@ -13,6 +13,14 @@ declare(strict_types=1);
 
 namespace Chanshige\Hydrator;
 
-interface ObjectHydratorInterface extends ExtractionInterface, HydrationInterface
+use Chanshige\Hydrator\Exception\LogicException;
+
+interface HydrationInterface
 {
+    /**
+     * @param mixed  $data
+     * @param string $className
+     * @throws LogicException
+     */
+    public function hydrate($data, string $className);
 }
