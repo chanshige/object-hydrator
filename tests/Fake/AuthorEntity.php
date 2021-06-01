@@ -2,38 +2,15 @@
 
 namespace Chanshige\Hydrator\Fake;
 
-use DateTimeInterface;
-
 class AuthorEntity
 {
-    /** @var int */
-    private $id;
-
-    /** @var string|null */
-    private $username;
-
-    /** @var string|null */
-    private $email;
-
-    /** @var string|null */
-    private $displayName;
-
-    /** @var BlogEntity|null */
-    private $blog;
-
     public function __construct(
-        int $id,
-        ?string $username = null,
-        ?string $email = null,
-        ?string $displayName = null,
-        ?BlogEntity $blog = null
-    ) {
-        $this->id = $id;
-        $this->username = $username;
-        $this->email = $email;
-        $this->displayName = $displayName;
-        $this->blog = $blog;
-    }
+        private int $id,
+        private ?string $username = null,
+        private ?string $email = null,
+        private ?string $displayName = null,
+        private ?BlogEntity $blog = null
+    ) {}
 
     public function getId(): int
     {

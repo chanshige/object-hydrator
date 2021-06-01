@@ -18,9 +18,7 @@ use Chanshige\Hydrator\Exception\LogicException;
 interface HydrationInterface
 {
     /**
-     * @param mixed  $data
-     * @param string $className
      * @throws LogicException
      */
-    public function hydrate($data, string $className);
+    public function hydrate(mixed $data, string $className);
 }
