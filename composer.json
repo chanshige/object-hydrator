@@ -37,9 +37,12 @@
   },
   "scripts": {
     "test": [
+      "phpunit"
+    ],
+    "tests": [
       "phpmd src text ./phpmd.xml",
       "phpcs src",
-      "phpunit"
+      "@test"
     ]
   }
 }
