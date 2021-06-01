@@ -26,7 +26,7 @@
     }
   },
   "require": {
-    "php": ">=7.3",
+    "php": "^8.0",
     "symfony/serializer": "^5.0",
     "symfony/property-access": "^5.0"
   },
@@ -37,9 +37,12 @@
   },
   "scripts": {
     "test": [
+      "phpunit"
+    ],
+    "tests": [
       "phpmd src text ./phpmd.xml",
       "phpcs src",
-      "phpunit"
+      "@test"
     ]
   }
 }
