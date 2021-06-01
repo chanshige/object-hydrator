@@ -18,9 +18,8 @@ use Chanshige\Hydrator\Exception\LogicException;
 interface ExtractionInterface
 {
     /**
-     * @param object[]|object $object
      * @return array<int|string, mixed>
      * @throws LogicException
      */
-    public function extract($object): array;
+    public function extract(object|array $object): array;
 }

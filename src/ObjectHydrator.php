@@ -20,13 +20,9 @@ use Throwable;
 
 final class ObjectHydrator implements ObjectHydratorInterface
 {
-    /** @var Serializer */
-    private $serializer;
-
-    public function __construct(Serializer $serializer)
-    {
-        $this->serializer = $serializer;
-    }
+    public function __construct(
+        private Serializer $serializer
+    ) {}
 
     /**
      * {@inheritDoc}
@@ -43,7 +39,7 @@ final class ObjectHydrator implements ObjectHydratorInterface
     /**
      * {@inheritDoc}
      */
-    public function extract($object): array
+    public function extract(object|array $object): array
     {
         try {
             return (array)$this->serializer->normalize($object, null, [
