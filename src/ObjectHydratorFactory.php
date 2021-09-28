@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Chanshige\Hydrator;
 
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -22,7 +23,10 @@ final class ObjectHydratorFactory
     public function newInstance(): ObjectHydratorInterface
     {
         return new ObjectHydrator(
-            new Serializer([new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter())])
+            new Serializer([
+                new DateTimeNormalizer(),
+                new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter())
+            ])
         );
     }
 }

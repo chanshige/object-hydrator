@@ -7,6 +7,8 @@ namespace Chanshige\Hydrator;
 use Chanshige\Hydrator\Exception\LogicException;
 use Chanshige\Hydrator\Fake\AuthorEntity;
 use Chanshige\Hydrator\Fake\BlogEntity;
+use DateTimeInterface;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
 class ObjectHydratorTest extends TestCase
@@ -34,6 +36,7 @@ class ObjectHydratorTest extends TestCase
     /**
      * @dataProvider blogDataProvider
      * @param array $data
+     * @throws
      */
     public function testHydrateWithInner(array $data)
     {
@@ -47,12 +50,16 @@ class ObjectHydratorTest extends TestCase
             blog: new BlogEntity(
                 id: $data['blog']['id'],
                 title: $data['blog']['title'],
-                contents: $data['blog']['contents']
+                contents: $data['blog']['contents'],
+                created: new DateTimeImmutable($data['blog']['created'])
             )
         );
 
         $this->assertInstanceOf(AuthorEntity::class, $object);
+        $this->assertInstanceOf(BlogEntity::class, $object->getBlog());
+        $this->assertInstanceOf(DateTimeInterface::class, $object->getBlog()->getCreated());
         $this->assertEquals($expected, $object);
+        $this->assertEquals('1988/01/21', $object->getBlog()->getCreated()->format('Y/m/d'));
     }
 
     public function testHydrateNullOrEmptyVal()
@@ -120,7 +127,8 @@ class ObjectHydratorTest extends TestCase
                     'blog' => [
                         'id' => 100,
                         'title' => 'first blog',
-                        'contents' => 'Hi!'
+                        'contents' => 'Hi!',
+                        'created' => '1988-01-21 12:00:55'
                     ]
                 ]
             ]
