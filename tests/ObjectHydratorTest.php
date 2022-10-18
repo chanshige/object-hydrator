@@ -9,6 +9,7 @@ use Chanshige\Hydrator\Fake\AuthorEntity;
 use Chanshige\Hydrator\Fake\BlogEntity;
 use DateTimeInterface;
 use DateTimeImmutable;
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 class ObjectHydratorTest extends TestCase
@@ -36,7 +37,7 @@ class ObjectHydratorTest extends TestCase
     /**
      * @dataProvider blogDataProvider
      * @param array $data
-     * @throws
+     * @throws Exception
      */
     public function testHydrateWithInner(array $data)
     {

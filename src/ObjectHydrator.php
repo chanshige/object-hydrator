@@ -22,7 +22,8 @@ final class ObjectHydrator implements ObjectHydratorInterface
 {
     public function __construct(
         private Serializer $serializer
-    ) {}
+    ) {
+    }
 
     /**
      * {@inheritDoc}
