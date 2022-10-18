@@ -7,11 +7,11 @@ An ObjectHydrator that array to object to array conversion. It internally uses S
 
 ## installation
 With Composer
-```
-$ composer require chanshige/object-hydrator 'v1.0'
-```
+
+    $ composer require chanshige/object-hydrator 'v1.0'
 
 ## Usage
+
     /** @var ObjectHydratorInterface $hydrator */
     $hydrator = (new ObjectHydratorFactory())->newInstance();
 
@@ -24,7 +24,7 @@ $ composer require chanshige/object-hydrator 'v1.0'
     $array = $hydrator->extract($object);
 
 ## Test
-`$ composer test`
+    $ composer test
 
 ## Contributing
 Feel free to create issues and submit pull requests. For any PR submitted, make sure it is covered by tests or include new tests.
